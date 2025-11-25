@@ -9,7 +9,7 @@ import (
 
 const OrderCreatedEvent = "order.created"
 
-func ConnectRabbitAMQP(user, pass, host, port string) (*amqp.Connection, func() error) {
+func ConnectRabbitAMQP(user, pass, host, port string) (*amqp.Channel, func() error) {
 	address := fmt.Sprintf("amqp://%s:%s@%s:%s/", user, pass, host, port)
 
 	conn, err := amqp.Dial(address)
@@ -32,5 +32,5 @@ func ConnectRabbitAMQP(user, pass, host, port string) (*amqp.Connection, func() 
 		log.Fatal(err)
 	}
 
-	return conn, conn.Close
+	return channel, conn.Close
 }
