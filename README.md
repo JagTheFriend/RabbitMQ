@@ -8,6 +8,10 @@ Currently, the package supports the following:
 - Publishing messages to a queue
 - Consuming messages from a queue
 
+## System Design
+
+![Rough System Design](image.png)
+
 ## Installation
 
 ```bash
