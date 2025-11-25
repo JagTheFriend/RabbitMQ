@@ -14,6 +14,14 @@ Currently, the package supports the following:
 
 ## Installation
 
+Using Docker Compose:
+
+```bash
+docker-compose up
+```
+
+Using Go Modules:
+
 ```bash
 git clone github.com/JagTheFriend/RabbitMQ.git
 cd ./RabbitMQ/common
