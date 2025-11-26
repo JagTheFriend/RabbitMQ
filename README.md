@@ -17,13 +17,13 @@ Currently, the package supports the following:
 Using Docker Compose:
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
 Using Go Modules:
 
 ```bash
-git clone github.com/JagTheFriend/RabbitMQ.git
+git clone https://github.com/JagTheFriend/RabbitMQ.git
 cd ./RabbitMQ/common
 go get
 ```

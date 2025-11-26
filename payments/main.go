@@ -21,12 +21,6 @@ func main() {
 		e := close()
 		if e != nil {
 			log.Fatal(e)
-			return
-		}
-		e = ch.Close()
-		if e != nil {
-			log.Fatal(e)
-			return
 		}
 	}()
 
@@ -34,19 +28,17 @@ func main() {
 }
 
 func listen(ch *amqp091.Channel) {
-	q, err := ch.QueueDeclare(common.OrderCreatedEvent, true, false, true, false, nil)
+	q, err := ch.QueueDeclare(common.OrderCreatedEvent, true, false, false, false, nil)
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 
 	msgs, err := ch.Consume(q.Name, "", true, false, false, false, nil)
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 
-	forever := make(chan bool)
+	var forever chan struct{}
 
 	go func() {
 		for d := range msgs {

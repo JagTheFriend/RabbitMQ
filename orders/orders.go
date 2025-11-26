@@ -22,12 +22,6 @@ func main() {
 		e := close()
 		if e != nil {
 			log.Fatal(e)
-			return
-		}
-		e = ch.Close()
-		if e != nil {
-			log.Fatal(e)
-			return
 		}
 	}()
 
@@ -35,17 +29,16 @@ func main() {
 		common.OrderCreatedEvent,
 		true,
 		false,
-		true,
+		false,
 		false,
 		nil,
 	)
 
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 
-	marshellerOrder, err := json.Marshal(common.Order{
+	marshallerOrder, err := json.Marshal(common.Order{
 		ID: "order-1",
 		Items: []common.Item{
 			{
@@ -57,7 +50,6 @@ func main() {
 
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 
 	err = ch.PublishWithContext(
@@ -68,12 +60,11 @@ func main() {
 		false,
 		amqp091.Publishing{
 			ContentType: "application/json",
-			Body:        marshellerOrder,
+			Body:        marshallerOrder,
 		})
 
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 
 	log.Println("Order created event published")
